@@ -1,33 +1,33 @@
 name: .NET CI Pipeline
 
-on:  # КОГДА запускать
-  push:  # При каждом push
+on:
+  push:
     branches: [ "main" ]
-  pull_request:  # И при каждом Pull Request
+  pull_request:
     branches: [ "main" ]
 
-jobs:  # ЧТО делать
-  build-and-test:  # Первая задача
-    runs-on: ubuntu-latest  # На какой ОС запускать
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
     
-    steps:  # Шаги задачи
-    # Шаг 1: Получить код
+    steps:
     - uses: actions/checkout@v4
     
-    # Шаг 2: Установить .NET
-    - name: Setup .NET
+    - name: Setup .NET 8
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0'
     
-    # Шаг 3: Восстановить зависимости
+    # Восстанови зависимости
     - name: Restore dependencies
       run: dotnet restore
     
-    # Шаг 4: Собрать проект
+    # Собери проект
     - name: Build
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build --configuration Release --no-restore
     
-    # Шаг 5: Запустить тесты
+    # Запусти тесты с явным указанием фреймворка
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: |
+        cd Tests/MyWebApi.Tests
+        dotnet test --framework net8.0 --verbosity normal
