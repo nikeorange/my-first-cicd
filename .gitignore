@@ -1,0 +1,31 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+coverage.*
